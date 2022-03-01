@@ -1,54 +1,39 @@
-import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import React, { Fragment, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { connect} from 'react-redux'
 import { handleInitialData } from '../actions/shared'
+import RequireAuth from './RequireAuth'
 import Login from './Login'
-import NewQuestion from './NewQuestion'
+import AddQuestion from './AddQuestion'
 import LeaderBoard from './LeaderBoard'
 import Home from './Home'
-import Poll from './Poll'
 import Nav from './Nav'
-import Question from './Question'
 import ViewPoll from './ViewPoll'
+import NotFound from './NotFound'
 
-class App extends Component {
-  componentDidMount() {
-    this.props.dispatch(handleInitialData())
-  }
-  render() {
-    const { authedUser } = this.props
-    return (
-      <Router>
-      	<Fragment>
-      		<div className='body'>
-      		  <Nav/>
-      		  <Routes>
-      		  {authedUser === null
-      		   ? <Route path='/*' element={<Login/>} />
-			   : <Fragment>
-                    <Route path='/' exact element={<Home/>} />
-                    <Route path='/new' exact element={<NewQuestion/>} />
-                    <Route path='/leaderboard' exact element={<LeaderBoard/>} />
-                    <Route path='/login' exact element={<Login/>} />
-					<Route path='/questions/:id' exact element={<ViewPoll/>} >
-					</Route>
+function App(props) {
+  useEffect(() => {
+    props.dispatch(handleInitialData())
+  })
 
-					<Route path="*" element={<Navigate to="/" />} />
-				 </Fragment>
-              }
-			  </Routes>
-      		</div>
-      	</Fragment>
-      	
-      </Router>
-    )
-  }
+  return (
+    <Router>
+      <Fragment>
+        <div className='body'>
+          <Nav/>
+          <Routes>
+            <Route path='/login' exact element={<Login/>} />
+            <Route path='/' exact element={<RequireAuth><Home/></RequireAuth>} />
+            <Route path='/add' exact element={<RequireAuth><AddQuestion/></RequireAuth>} />
+            <Route path='/leaderboard' exact element={<RequireAuth><LeaderBoard/></RequireAuth>} />
+            <Route path='/questions/:id' exact element={<RequireAuth><ViewPoll/></RequireAuth>} />
+            <Route path='*' element={<RequireAuth><NotFound/></RequireAuth>} />
+         </Routes>
+        </div>
+      </Fragment>
+    </Router>
+  )
 }
 
-function mapStateToProps({ authedUser }) {
-  return {
-    authedUser
-  }
-}
 
-export default connect(mapStateToProps)(App);
+export default connect()(App);

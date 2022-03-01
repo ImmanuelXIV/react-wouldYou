@@ -1,53 +1,48 @@
-import React, { Component } from 'react'
-import { NavLink, Navigate } from 'react-router-dom'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 
-class Nav extends Component {
-  
-  handleLogin = (e) => {
+function Nav(props) {
+  // put this in Login or Auth?
+  const handleLogout = (e) => {
     e.preventDefault()
-    this.props.dispatch(setAuthedUser(null))
-    //this.props.history.push(`/home`)
-    //console.log('history push was called')
+    props.dispatch(setAuthedUser(null))
   }
   
-  render() {
-    return (
-      <nav className='nav'>
-          <ul>
-              <li>
-                  <NavLink to='/' exact="true" activeclassname='active'>
-                      Home
-                  </NavLink>
-              </li>
-              <li>
-                  <NavLink to='/new' exact="true" activeclassname='active'>
-                      New Question
-                  </NavLink>
-              </li>
-              <li>
-                  <NavLink to='/leaderboard' exact="true" activeclassname='active'>
-                      Leaderboard
-                  </NavLink>
-              </li>
-              <li>
-                  {this.props.authedUser === null
-                  ? <NavLink to='/login' exact="true" activeclassname='active'>
-                      Login
-                    </NavLink>
-                  : <NavLink to='/login' exact="true" activeclassname='active' onClick={(event) => this.handleLogin(event)}>
-                      {`Hello ${this.props.authedUserName} - Logout`}
-                    </NavLink>
-                  }
-
-              </li>
-          </ul>
-      </nav>
+  return (
+    <nav className='nav'>
+        <ul>
+            <li>
+                <NavLink to='/' exact="true" activeclassname='active'>
+                    Home
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to='/add' exact="true" activeclassname='active'>
+                    Add Question
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to='/leaderboard' exact="true" activeclassname='active'>
+                    Leaderboard
+                </NavLink>
+            </li>
+            <li>
+              {!props.authedUser && 
+                <NavLink to='/login' exact="true" activeclassname='active'>
+                    Login
+                </NavLink>
+              }
+              {props.authedUser && 
+                <NavLink to='/login' exact="true" activeclassname='active' onClick={(event) => handleLogout(event)}>
+                {`Hello ${props.authedUserName} - Logout`}
+              </NavLink>
+              }
+            </li>
+        </ul>
+    </nav>
   )
-  
-  }
-  
 }
 
 function mapStateToProps({ authedUser, users }) {

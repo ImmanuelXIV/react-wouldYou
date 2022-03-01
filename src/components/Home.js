@@ -1,75 +1,58 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
-import ViewPoll from './ViewPoll'
 
 
-class Home extends Component {
-  state = {
-    toggleOpt: 'unanswered'
+function Home(props) {
+  const { questions, authedUserAnswers } = props
+  const [ toggleOpt , settoggleOpt ] = useState('unanswered')
+  
+  const onChange = (event) => {
+    settoggleOpt(event.target.value)
   }
   
-  onChange = (event) => {
-    //console.log(event.target.value)
-    this.setState(() => ({
-      toggleOpt: event.target.value
-    }))
-  }
-  
-  render() {
-    const { authedUser, questions, authedUserAnswers, authedUserQuestions } = this.props
-    //ToDo: change className for radio button
-   
-    return (
-	  <div className='container'>
-        
-        {this.props.loading === true
-        ? null
-        :
-          <div>
-         	<div className='question-list'>
-              <div className='question'>
-                <input type='radio' 
-                  value='unanswered' 
-                  name='qselect' 
-                  checked={this.state.toggleOpt === 'unanswered'}
-                  onChange={(event) => this.onChange(event)}
-                  /> Unanswered
-                <input type='radio' 
-                  value='answered' 
-                  name='qselect' 
-                  checked={this.state.toggleOpt === 'answered'}
-                  onChange={(event) => this.onChange(event)}
-                  /> Answered
-              </div>
+  //ToDo: change className for radio button
+  return (
+  <div className='container'>
+      {props.loading === true
+      ? null
+      : <div>
+          <div className='question-list'>
+            <div className='question'>
+              <input type='radio' 
+                value='unanswered' 
+                name='qselect' 
+                checked={toggleOpt === 'unanswered'}
+                onChange={(event) => onChange(event)}/> Unanswered
+              <input type='radio' 
+                value='answered' 
+                name='qselect' 
+                checked={toggleOpt === 'answered'}
+                onChange={(event) => onChange(event)}/> Answered
             </div>
-{/*<ViewPoll question={question} key={question.id}/>  <Question question={question} key={question.id}/> */}
-         	<div className='question-list'>
-      		{this.state.toggleOpt === 'unanswered' 
-         		? questions.map((question) => {
-                    return !authedUserAnswers.hasOwnProperty(question.id) 
-                      ? <Question question={question} key={question.id} />
-                      : null
-                  })
-				: questions.map((question) => {
-                    return authedUserAnswers.hasOwnProperty(question.id) 
-                      ? <Question question={question} key={question.id}/>
-                      : null
-                  })
-			}
-      	    </div>
           </div>
-      	
-        }
-      </div>
-    )
-  }
+          <div className='question-list'>
+            {toggleOpt === 'unanswered' 
+              ? questions.map((question) => {
+                  return !authedUserAnswers.hasOwnProperty(question.id) 
+                    ? <Question question={question} key={question.id} />
+                    : null
+                })
+              : questions.map((question) => {
+                  return authedUserAnswers.hasOwnProperty(question.id) 
+                    ? <Question question={question} key={question.id}/>
+                    : null
+                })
+            }
+          </div>
+        </div>
+      }
+    </div>
+  ) 
 }
 
 function mapStateToProps({ authedUser, questions, users }) {
-  //ToDo
   return {
-    authedUser,
     loading: authedUser === null,
     questions: authedUser === null 
     	? null
@@ -92,9 +75,6 @@ function mapStateToProps({ authedUser, questions, users }) {
     authedUserAnswers: authedUser === null 
     	? null
     	: users[authedUser].answers,
-    authedUserQuestions: authedUser === null 
-    	? null
-    	: users[authedUser].questions,
   }
 }
 
