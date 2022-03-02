@@ -36,16 +36,20 @@ function ViewPoll(props) {
         <div>
           View Results
           <h4>Would you rather...</h4>
-          <h4>{`${question.optionOne.text}`}</h4>
-          <progress value={(totalOptOne/totalResponses)*100} max="100"/>
-          <p>{`${Math.round((totalOptOne/totalResponses)*100)}% of people (or ${totalOptOne} out of ${totalResponses} votes) 
-          ${answer === 'optionOne' ? '- including your vote' : ''}`}
-          </p>
-          <h4>{`${question.optionTwo.text}`}</h4>
-          <progress value={(totalOptTwo/totalResponses)*100} max="100"/>
-          <p>{`${Math.round((totalOptTwo/totalResponses)*100)}% of people (or ${totalOptTwo} out of ${totalResponses} votes)
-          ${answer === 'optionTwo' ? '- including your vote' : ''}`}
-          </p>
+          <div style={{backgroundColor: answer === 'optionOne' ? 'aliceblue' : 'none'}}>
+            <h4>{`${question.optionOne.text}`}</h4>
+            <progress value={(totalOptOne/totalResponses)*100} max="100"/>
+            <p>{`${Math.round((totalOptOne/totalResponses)*100)}% of people (or ${totalOptOne} out of ${totalResponses} votes) 
+            ${answer === 'optionOne' ? '- including your vote' : ''}`}
+            </p>
+          </div>
+          <div style={{backgroundColor: answer === 'optionTwo' ? 'aliceblue' : 'none'}}>
+            <h4>{`${question.optionTwo.text}`}</h4>
+            <progress value={(totalOptTwo/totalResponses)*100} max="100"/>
+            <p>{`${Math.round((totalOptTwo/totalResponses)*100)}% of people (or ${totalOptTwo} out of ${totalResponses} votes)
+            ${answer === 'optionTwo' ? '- including your vote' : ''}`}
+            </p>
+          </div>
         </div>
       : 
         <div>

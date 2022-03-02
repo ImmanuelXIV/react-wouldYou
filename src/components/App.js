@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { connect} from 'react-redux'
+import LoadingBar from 'react-redux-loading-bar'
 import { handleInitialData } from '../actions/shared'
 import RequireAuth from './RequireAuth'
 import Login from './Login'
@@ -21,6 +22,7 @@ function App(props) {
       <Fragment>
         <div className='body'>
           <Nav/>
+          <LoadingBar />
           <Routes>
             <Route path='/login' exact element={<Login/>} />
             <Route path='/' exact element={<RequireAuth><Home/></RequireAuth>} />
