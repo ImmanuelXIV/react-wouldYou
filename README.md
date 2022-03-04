@@ -2,13 +2,9 @@
 
 This React Redux web app lets a user play the game “Would You Rather?”. A users can submit questions in the form “Would you rather [option A] or [option B]?”. When you log in you can answer these questions and see how other users voted as well. The more you engage the higher your score on the leaderboard.
 
-App flow             |  Voting flow
+Login flow             |  Voting flow
 :-------------------------:|:-------------------------:
 ![Home screen](assets/login.gif)  |  ![Search screen](assets/vote-poll.gif)
-
-Add question             |  Leaderboard screen
-:-------------------------:|:-------------------------:
-![Home screen](assets/add-question.png)  |  ![Search screen](assets/leaderboard.png)
 
 ## Summary
 
