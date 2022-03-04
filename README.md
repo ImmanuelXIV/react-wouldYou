@@ -17,8 +17,8 @@ Add question             |  Leaderboard screen
   - [Users](#users)
   - [Questions](#questions)
   - [Voting Options](#voting-options)
-- [Important](#important)
 - [Create React App](#create-react-app)
+- [Author](#author)
 - [License](#license)
 
 ## Get Started
@@ -116,6 +116,10 @@ Your code will talk to the database via 4 methods:
 | authedUser | String | The id of the user who answered the question|
 | qid | String | The id of the question that was answered|
 | answer | String | The option the user selected. The value should be either `"optionOne"` or `"optionTwo"`|
+
+## Author
+
+- Immanuel Schwall - Software Engineer, Machine Learning, Web3
 
 ## Create React App
 
