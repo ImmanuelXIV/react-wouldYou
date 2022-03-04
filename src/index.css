@@ -45,7 +45,8 @@ li {
 .question, 
 .scorecard, 
 .view-poll,
-.login-card {
+.login-card,
+.not-found {
   width: 80%;
   max-width: 600px;
   border: 1px solid black;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { handleSaveAnswer } from '../actions/questions'
 
 
@@ -9,6 +9,11 @@ function ViewPoll(props) {
   const { id } = useParams()
   const { authedUser, questions, users } = props
   const question = questions.find(question => ( question.id === id ))
+
+  if (!question) {
+    return <Navigate to='/404'/>
+  }
+  
   const totalOptOne = question.optionOne.votes.length 
   const totalOptTwo = question.optionTwo.votes.length 
   const totalResponses = question.optionOne.votes.length + question.optionTwo.votes.length
