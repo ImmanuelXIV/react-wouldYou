@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { Link, Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 function Question(props) {
-  const { authedUser, users, question } = props
+  const { users, question } = props
+  const navigate = useNavigate()
   
-  const handleView = (event) => {
-    // necessary?
+  const handleClick = () => {
+    navigate(`/questions/${question.id}`)
   }
 
   return (
@@ -27,31 +28,26 @@ function Question(props) {
         {question.optionTwo.text}
       </div>
       <hr/>
-      <Link to={`/questions/${question.id}`} >
         <button
           className='btn'
           type='submit'
-          onClick={(event) => handleView(event)}
-          disabled={authedUser === null}>
+          onClick={() => handleClick()}
+          disabled={false}>
           View Poll
         </button>
-      </Link>
     </div>
   )
 }
 
-function mapStateToProps({ authedUser, users }) {
+function mapStateToProps({ users }) {
   return {
-    authedUser,
-    users: authedUser === null 
-    	? null
-    	: Object.keys(users).map((user) => ({        
-          id: users[user].id,
-          name: users[user].name,
-          avatarURL: users[user].avatarURL,
-          questions: users[user].questions,
-          answers: users[user].answers
-        })),
+    users: Object.keys(users).map((user) => ({
+      id: users[user].id,
+      name: users[user].name,
+      avatarURL: users[user].avatarURL,
+      questions: users[user].questions,
+      answers: users[user].answers
+    })),
   }
 }
 

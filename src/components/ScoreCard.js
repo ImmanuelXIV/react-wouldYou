@@ -27,10 +27,4 @@ function ScoreCard(props) {
   )
 }
 
-function mapStateToProps({ users }) {
-  return {
-    users
-  }
-}
-
-export default connect(mapStateToProps)(ScoreCard)
+export default connect()(ScoreCard)
