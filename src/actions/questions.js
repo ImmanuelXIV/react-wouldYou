@@ -12,8 +12,6 @@ export function receiveQuestions(questions) {
 }
 
 function addQuestion(question) {
-  //console.log(`addQuestion is called ---------------------`)
-  //console.log(`addQuestion: ${JSON.stringify(question)}`)
   return {
     type: ADD_QUESTION,
     question
@@ -21,26 +19,21 @@ function addQuestion(question) {
 }
 
 export function handleAddQuestion({ opt1, opt2 }) {
-  //console.log(`handleAddQuestion is called ---------------------`)
   return (dispatch, getState) => {
     const { authedUser } = getState()
     
-    // ToDo: change author to generic authedUser 
     return _saveQuestion({
       author: authedUser,
       optionOneText: opt1,
       optionTwoText: opt2
     })
     .then((question) => {
-      //console.log(`saveQ: ${JSON.stringify(question)}`)
       dispatch(addQuestion(question))
     })
-    // return question obj: id, author, optionOne, optionTwo, timestamp
   }
 }
 
 function saveAnswer(answerObj) {
-  //console.log('Save answer action called')
   return {
     type: SAVE_ANSWER,
     answerObj
@@ -55,16 +48,7 @@ export function handleSaveAnswer({ qid, answer }) {
       qid: qid,
       answer: answer
     }
-
-    //console.log(`Yay, X ${JSON.stringify(x)}!`)
-    //console.log('calling saveAnswer()')
-    // update store via reducer
     dispatch(saveAnswer(answerObj))
-    
-    
-    //console.log('Yay, worked!')
-    
-    // Save answer to particular poll in database.
     return _saveQuestionAnswer({
       authedUser: authedUser,
       qid: qid,

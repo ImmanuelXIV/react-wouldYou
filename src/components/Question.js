@@ -16,7 +16,7 @@ function Question(props) {
       <div>
         {question.author}
       </div>
-      <img className='avatar' src={users.find(usr => ( usr.id === question.author )).avatarURL}/>
+      <img className='avatar' src={users.find(usr => ( usr.id === question.author )).avatarURL} alt='user'/>
       <hr/>
       <div>
         {'Would you rather ...'}

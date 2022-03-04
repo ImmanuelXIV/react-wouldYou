@@ -32,7 +32,7 @@ function Login(props) {
           <hr/>
           {selectedUser === '' 
           ? null
-          : <img className='avatar' src={options.find(opt => ( opt.value === selectedUser )).avatarURL} />
+          : <img className='avatar' src={options.find(opt => ( opt.value === selectedUser )).avatarURL} alt='user'/>
           }  
           <Select
             options={options}

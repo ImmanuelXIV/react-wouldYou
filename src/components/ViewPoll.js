@@ -30,7 +30,7 @@ function ViewPoll(props) {
           <h4>{`${question.author} asks:`}</h4>
         </div>
         <hr/>
-        <img className='avatar' src={users.find(usr => ( usr.id === question.author )).avatarURL}/>
+        <img className='avatar' src={users.find(usr => ( usr.id === question.author )).avatarURL} alt='user'/>
         <hr/>
         {question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser) 
         ? <div>

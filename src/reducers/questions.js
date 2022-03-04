@@ -10,7 +10,6 @@ export default function questions(state={}, action) {
     case ADD_QUESTION:
       return {
         ...state,
-        // return question obj: id, author, optionOne, optionTwo, timestamp
         [action.question.id]: {
           ...action.question
         }

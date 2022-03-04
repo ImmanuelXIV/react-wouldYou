@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 
 function Nav(props) {
-  // put this in Login or Auth?
   const handleLogout = (e) => {
     e.preventDefault()
     props.dispatch(setAuthedUser(null))

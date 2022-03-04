@@ -7,7 +7,7 @@ function ScoreCard(props) {
   
   return (
     <div key={user.id} className='scorecard'>
-      <img className='avatar' src={user.avatarURL}/>
+      <img className='avatar' src={user.avatarURL} alt='user'/>
       <div>
         {user.name}
       </div>

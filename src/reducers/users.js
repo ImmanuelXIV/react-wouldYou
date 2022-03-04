@@ -9,7 +9,6 @@ export default function users(state={}, action) {
         ...action.users
       }
     case SAVE_ANSWER:
-      console.log('SAVE_ANSWER in user reducer called')
       return {
         ...state,
         [action.answerObj.authedUser]: {
@@ -21,8 +20,6 @@ export default function users(state={}, action) {
         }
       }
     case ADD_QUESTION:
-      console.log('ADD_QUESTION in user reducer called')
-      console.log('ADD QUESTION obj', action)
       return {
         ...state,
         [action.question.author]: {
