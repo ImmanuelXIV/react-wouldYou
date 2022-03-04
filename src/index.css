@@ -69,7 +69,6 @@ li {
 
 .textarea {
   width: 100%;
-  min-length: 400px;
   min-height: 30px;
 }
 
@@ -80,6 +79,8 @@ progress[value] {
 }
 
 .btn {
+  display: flex;
+  justify-content: center;
   width: 250px;
   margin: 35px auto;
   padding: 10px;
