@@ -37,4 +37,4 @@ function App(props) {
   )
 }
 
-export default connect()(App);
+export default connect()(App)
